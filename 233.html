@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <style>
+            body{
+                background-image: url(fengjing.jpg);
+                background-repeat: no-repeat;
+                background-position-y: -150px;
+                background-size: 100%;
+            }
+            ul{
+                background-image: url(微软.jpg);
+                list-style-type: none;
+                margin: 0px;  /*什么意思*/
+                padding: 0px;
+                overflow: hidden;/*无实际意义，以防万一文字超过框*/
+                border:solid 1px;
+                background-color: rgb(0,0,0,0.2);
+            }
+            /*ul::before{
+                content:url(微软.png); 为什么插入不行？
+            }*/
+            li{
+                float: left;  /*这个与下面的block一块使用达到横着的效果，否则就用一个display:inline也可以*/
+                border-right: 1px solid;
+            }
+            li:first-child{
+                border-right:none;
+            }
+            li a{
+                display: block;/*将行内元素转换为块元素，用于导航栏！*/
+                padding:14px 16px;  /*宽度是picture和video之间那个空隙，否则会连在一起*/
+                text-align:center; /*a标签文字在它自己的盒子里居中*/
+                text-decoration: none; /*去除下划线*/
+                color: black;
+            }
+            a:link{  /*未访问的链接*/
+                color:gainsboro;
+            }
+            a:visited{  /*已访问的链接*/
+                color: blue;
+            }
+            .前两个:hover{  /*鼠标悬浮后显示，必须有前面两个！*/
+                background-color:salmon;
+            }
+            a:active{ /*选中的样式，指示当前位置*/
+                background-color: orangered;
+            }
+            .dropdown{
+                position: relative;
+                display: inline-block;
+                padding: 14px 16px;  /*span不能调整padding*/
+            }
+            .dropdown-content{
+                display: none;/*先隐藏，一会显示*/
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                border-radius: 10px;
+            }
+            .dropdown-content a{
+                display: block; /*不变成块状无法设置格式*/
+                text-decoration: none;
+                color: black;
+                padding: 12px 16px;
+            }
+            /*鼠标悬浮出现下拉菜单*/
+            .dropdown:hover .dropdown-content{  /*为dropdown设置悬浮格式，悬浮的对象是去查找.dropdown-content*/
+                display: block; /*这里改display什么意思*/
+            }
+            /*鼠标悬浮到下拉菜单的某行样式改变*/
+            .dropdown-content a:hover{  /*查找.dropdown-content的子集a,为其设置悬浮格式*/
+                color: blue; 
+                background-color:rgba(134, 133, 133, 0.2)
+            }
+            input[type=text]{
+                border-radius: 15px; /*圆角*/
+                width: 180px;
+                padding:12px 35px; /*不设置padding，搜索定位符会顶头不好看*/
+                color: gray;
+                font-size: 13px;
+                border: 2px gray solid;
+                background-color: white;
+                background-image: url(放大镜.png);
+                background-size: 11%;
+                background-repeat: no-repeat;
+                background-position-x: 7px;
+                background-position-y: 3px;
+                 /*鼠标悬浮时动态延展*/
+                -webkit-transition: width 0.3s ease-in-out;
+                transition: width 0.3s ease-in-out;
+                /* outline: none; 默认被选中的搜索框变蓝，这样可以去除*/
+                margin-top: 300px;
+            }
+            .search{
+                border-radius: 5px;
+                font-size: 12px;
+                box-sizing: border-box;
+            }
+            /*鼠标悬浮搜索框样式改变*/
+            input[type="text"]:hover{
+                background-color: salmon;
+                width: 300px;
+                /*input标签的hover和属性设置都用[type=""的属性选择器！不要用.名字查找]*/
+            }
+            默认被选中的搜索框变蓝，可用:focus设置选中搜索框时的样式
+            input[type="text"]:focus selector{
+                border:orangered 3px solid;
+                width: 100%;
+            }  /*hover和focus有什么区别？focus是点击时？为什么悬浮也动态延展了*/
+            .search:focus{
+                background-color: rgb(47, 213, 255);
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li><img src="微软.jpg" alt="" width="100" height="30"></li>
+            <li><a class="前两个">pictuer</a></li>
+            <li><a class="前两个">video</a></li>
+            <li>
+                <div class="dropdown">
+                    <span class="dropbtn">more</span>
+                </div>
+                <div class="dropdown-content">
+                    <a href="#">map</a>
+                    <a href="#">news</a>
+                </div>
+            </li>
+        </ul>
+        <div  class="center" style="text-align:center;vertical-align:middle;">
+            <input type="text" name="search"  value="Search" >
+        </div>
+        <br>
+        <div style="text-align: center;vertical-align:middle;">
+            <button class="search">search</button>
+        </div>
+        <!--怎样这两个按钮居中-->
+    </body>
+</html>
